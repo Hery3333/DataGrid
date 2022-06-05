@@ -1,18 +1,29 @@
-import {GridComponent, ColumnsDirective, ColumnDirective ,Page,Inject, Filter} from '@syncfusion/ej2-react-grids'
+import {GridComponent, ColumnsDirective, ColumnDirective ,Page,Inject, Edit,Filter,Toolbar} from '@syncfusion/ej2-react-grids'
 import './App.css';
 import data from './dataSource.json';
 function App() {
+
+  const editOptions = {allowEditing: true, allowDeleting: true, allowAdding: true, mode:'Dialog'}
+  const toolbarOptions = ['Add','Edit','Delete']
+
   return (
     <div style={{ margin:'10%', marginTop: '10%'}}>
-      <GridComponent dataSource={data} allowPaging={true} allowFiltering={true} pageSettings={{pageSize:6}}>
+      <GridComponent 
+        dataSource={data}
+        allowPaging={true}
+        pageSettings={{pageSize:6}}
+        editSettings={editOptions}
+        toolbar={toolbarOptions}
+        >
         <ColumnsDirective>
           <ColumnDirective field='OrderID' headerText='OrderID' textAlign='Right' width='100' isPrimaryKey={true}/>
           <ColumnDirective field='CustomerID' headerText='Customer ID'/>
-          <ColumnDirective field='ShipCountry' headerText='Country'/>
+          <ColumnDirective field='ShipCountry' headerText='Country' />
           <ColumnDirective field='ShipName' headerText='Ship Name'/>
-          <ColumnDirective field='Freight' />
+          <ColumnDirective field='Freight' editType='numericedit' />
+          <ColumnDirective field='ShippedDate' type='date' format='yMd' editType='datepickeredit'/>
         </ColumnsDirective>
-        <Inject services={[Page,Filter]}/>
+        <Inject services={[Page,Edit,Toolbar]}/>
       </GridComponent>
     </div>
   );
