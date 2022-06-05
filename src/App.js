@@ -1,10 +1,25 @@
 import {GridComponent, ColumnsDirective, ColumnDirective ,Page,Inject, Edit,Filter,Toolbar} from '@syncfusion/ej2-react-grids'
 import './App.css';
 import data from './dataSource.json';
+
+import { IOrderModel } from './orderModel.tsx';
+import DialogFormTemplate from './DialogFormTemplate.tsx';
+
 function App() {
 
-  const editOptions = {allowEditing: true, allowDeleting: true, allowAdding: true, mode:'Dialog'}
+  const editOptions = { 
+    allowEditing: true,
+     allowDeleting: true,
+     allowAdding: true,
+//template: DialogFormTemplate,
+     mode:'Dialog'}
   const toolbarOptions = ['Add','Edit','Delete']
+
+  function dialogTemplate(props){
+     //return the template
+     return DialogFormTemplate;
+
+  }
 
   return (
     <div style={{ margin:'10%', marginTop: '10%'}}>
